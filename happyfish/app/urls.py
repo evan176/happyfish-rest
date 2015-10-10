@@ -41,6 +41,7 @@ logger = logging.getLogger(__name__)
 
 urlpatterns = [
     url(r'^upload/$', views.upload_data),
+    url(r'^get/$', views.get_data),
 ]
 
 

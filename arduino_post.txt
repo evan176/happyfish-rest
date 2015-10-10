@@ -1,0 +1,25 @@
+void post_json(String URL, int port, String data){
+    Serial.println("Connecting to website...");
+    if (cli.connect(URL, port)){
+        cli.println("POST /1/classes/GameScores HTTP/1.1");
+        cli.print("Host: ");
+        cli.println(URL);
+        /*cli.println("Connection: keep-alive");*/ 
+        cli.println("Content-Type: text/plain; charset=UTF-8");
+        cli.println("Connection: close");
+        cli.println("Content-Type: application/json");
+        String thisLength = String(data.length());
+        cli.println("Content-Length: " + thisLength);
+        cli.println();
+        cli.println(data);
+        
+        x = cli.read(); // 讀取
+        if(x < 0)
+            break;
+        Serial.print((char) x); // 印出到序列埠
+    }
+    else {
+        Serial.println("Connection failed");
+        cli.stop();
+    }
+}
